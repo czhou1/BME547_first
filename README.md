@@ -9,7 +9,7 @@ Fall 2021
 
 * Data will include:
 * Patient Name
-+ First Name
-+ Last Name
+  + First Name
+  + Last Name
 * Date of Birth
 * Blood Type

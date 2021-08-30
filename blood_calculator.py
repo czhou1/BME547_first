@@ -5,7 +5,7 @@ Created on Mon Aug 30 12:45:49 2021
 @author: celin
 """
 def interface():
-	print("Blood Calculator")
+    print("Blood Calculator")
     keep_running = True
     while keep_running:
         print("Make a choice")

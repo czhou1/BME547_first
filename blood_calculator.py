@@ -23,7 +23,8 @@ def interface():
             LDL_Driver()
     print(choice)
     return choice
-    
+
+# HDL analysis    
 def HDL_Driver():
     HDL_value = hdl_input()
     HDL_character = hdl_analysis(HDL_value)
@@ -44,6 +45,7 @@ def hdl_analysis(HDL_value):
 def hdl_output(HDL_value, HDL_answer):
     print("The HDL value of {} is considered {}".format(HDL_value, HDL_answer))
 
+# LDL Analysis
 def LDL_Driver():
     LDL_value = ldl_input()
     LDL_character = ldl_analysis(LDL_value)
@@ -66,7 +68,26 @@ def ldl_analysis(LDL_value):
 def ldl_output(LDL_value, LDL_answer):
     print("The LDL value of {} is considered {}".format(LDL_value, LDL_answer))
 
+# Cholesterol Analysis
+def C_Driver():
+    C_value = c_input()
+    C_character = c_analysis(C_value)
+    c_output(C_value, C_character)
+    
+def c_input():
+    c_value = int(input(("Enter Cholesterol Value: ")))
+    return c_value
 
+def c_analysis(C_value):
+    if C_value >= 240:
+        return "High"
+    elif 200 <= C_value <= 239:
+        return "Borderline High"
+    else:
+        return "Normal"
+
+def c_output(C_value, C_answer):
+    print("The cholesterol value of {} is considered {}".format(C_value, C_answer))
 
 
     

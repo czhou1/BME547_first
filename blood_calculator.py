@@ -5,6 +5,7 @@ Created on Mon Aug 30 12:45:49 2021
 @author: celin
 """
 
+
 def interface():
     print("Blood Calculator")
     keep_running = True
@@ -24,15 +25,18 @@ def interface():
     print(choice)
     return choice
 
-# HDL analysis    
+
+# HDL analysis
 def HDL_Driver():
     HDL_value = hdl_input()
     HDL_character = hdl_analysis(HDL_value)
     hdl_output(HDL_value, HDL_character)
-    
+
+
 def hdl_input():
     hdl_value = int(input(("Enter HDL Value: ")))
     return hdl_value
+
 
 def hdl_analysis(HDL_value):
     if HDL_value >= 60:
@@ -42,18 +46,22 @@ def hdl_analysis(HDL_value):
     else:
         return "Low"
 
+
 def hdl_output(HDL_value, HDL_answer):
     print("The HDL value of {} is considered {}".format(HDL_value, HDL_answer))
+
 
 # LDL Analysis
 def LDL_Driver():
     LDL_value = ldl_input()
     LDL_character = ldl_analysis(LDL_value)
     ldl_output(LDL_value, LDL_character)
-    
+
+
 def ldl_input():
     ldl_value = int(input(("Enter LDL Value: ")))
     return ldl_value
+
 
 def ldl_analysis(LDL_value):
     if LDL_value >= 190:
@@ -65,18 +73,22 @@ def ldl_analysis(LDL_value):
     else:
         return "Normal"
 
+
 def ldl_output(LDL_value, LDL_answer):
     print("The LDL value of {} is considered {}".format(LDL_value, LDL_answer))
+
 
 # Cholesterol Analysis
 def C_Driver():
     C_value = c_input()
     C_character = c_analysis(C_value)
     c_output(C_value, C_character)
-    
+
+
 def c_input():
     c_value = int(input(("Enter Cholesterol Value: ")))
     return c_value
+
 
 def c_analysis(C_value):
     if C_value >= 240:
@@ -86,9 +98,11 @@ def c_analysis(C_value):
     else:
         return "Normal"
 
+
 def c_output(C_value, C_answer):
-    print("The cholesterol value of {} is considered {}".format(C_value, C_answer))
+    print("The cholesterol value of {} is considered {}".format
+          (C_value, C_answer))
 
 
-    
-interface()
+if __name__ == "__main__":
+    interface()

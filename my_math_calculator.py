@@ -21,4 +21,3 @@ def add_positive_integers(a, b):
     if type(a) is not int or type(b) is not int:
         raise TypeError("Cannot add non-integers")
     return a + b
-        

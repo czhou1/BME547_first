@@ -9,7 +9,7 @@ db = []
 
 
 def initialize_server():
-    logging.basicConfig(filename='heatlh_db_server.log', level=logging.DEBUG)
+    logging.basicConfig(filename='health_db_server.log', level=logging.DEBUG)
     add_database_entry('patient one', 1, 'O-')
     
 

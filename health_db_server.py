@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import logging
+from pymodm import connect, MongoModel, fields
 
 # Define variable to contain Flask class for server
 app = Flask(__name__)
@@ -10,13 +11,14 @@ db = []
 
 def initialize_server():
     logging.basicConfig(filename='health_db_server.log', level=logging.DEBUG)
-    add_database_entry('patient one', 1, 'O-')
-    
+    print("Connecting to MongoDB...")
+    connect("mongodb+srv://cz124:mongo_db@cluster0.jdfcs.mongodb.net/"
+            "myFirstDatabase?retryWrites=true&w=majority")
+    print("Connected.")
 
 
 @app.route("/", methods=["GET"])
 def status():
-
     return "Server is on"
 
 
@@ -92,6 +94,13 @@ def validate_server_input(in_data, expected_keys):
     return True, 200
 
 
+class Patient(MongoModel):
+    name = fields.CharField()
+    id = fields.IntegerField(primary_key=True)
+    blood_type = fields.CharField()
+    tests = fields.ListField()
+
+
 def add_database_entry(patient_name, id_no, blood_type):
     """Creates new patient database entry
 
@@ -115,13 +124,11 @@ def add_database_entry(patient_name, id_no, blood_type):
         dict: the patient database entry
 
     """
-    patient_to_add = {"name": patient_name,
-                      "id": id_no,
-                      "blood_type": blood_type,
-                      "tests": []}
-    db.append(patient_to_add)
-    print(db)
-    return patient_to_add
+    patient_to_add = Patient(name=patient_name,
+                             id=id_no,
+                             blood_type=blood_type)
+    answer = patient_to_add.save()
+    return answer
 
 
 @app.route("/add_test", methods=["POST"])
@@ -193,7 +200,7 @@ def add_test_result(patient, in_data):
 
     """
     test_data_to_add = (in_data["test_name"], in_data["test_result"])
-    patient["tests"].append(test_data_to_add)
+    patient.tests.append(test_data_to_add)
     return patient
 
 

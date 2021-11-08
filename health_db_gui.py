@@ -1,7 +1,20 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog, messagebox
+from PIL import Image, ImageTk
 
 from health_db_client import add_patient_to_server
+
+
+def load_and_resize_image(filename):
+    pil_image = Image.open(filename)
+    original_size = pil_image.size
+    adj_factor = 0.5
+    new_width = round(original_size[0] * adj_factor)
+    new_height = round(original_size[1] * adj_factor)
+    resized_image = pil_image.resize((new_width, new_height))
+    tk_image = ImageTk.PhotoImage(resized_image)
+    return tk_image
 
 
 def create_output(name, id, blood_letter, rh_factor, center):
@@ -84,6 +97,15 @@ def design_window():
         """
         root.destroy()
 
+    def change_picture_cmd():
+        filename = filedialog.askopenfilename(initialdir="image")
+        if filename == '':
+            messagebox.showinfo("Cancel", "You cancelled the image load")
+            return
+        tk_image = load_and_resize_image(filename)
+        image_label.configure(image=tk_image)
+        image_label.image = tk_image
+
     root = tk.Tk()
     root.title("Health Database GUI")
     # root.geometry("10x2")
@@ -137,6 +159,15 @@ def design_window():
 
     cancel_button = ttk.Button(root, text="Cancel", command=cancel_cmd)
     cancel_button.grid(column=2, row=6)
+
+    tk_image = load_and_resize_image("image/blank_pic.jpg")
+    image_label = ttk.Label(root, image=tk_image)
+    image_label.grid(column=0, row=7)
+
+    change_picture_btn = ttk.Button(root, text='Change Picture',
+                                    command=change_picture_cmd)
+    change_picture_btn.grid(column=1, row=7)
+
 
     root.mainloop()
 

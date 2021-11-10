@@ -60,6 +60,13 @@ def design_window():
 
     """
 
+
+    # def send_image_to_server_cmd():
+    #     from send_image_to_server import send_image_to_server
+    #     filename = file_entry.get()
+    #     reply = send_image_to_server(filename)
+
+
     def ok_button_cmd():
         """Event to run when Ok button is pressed
 
